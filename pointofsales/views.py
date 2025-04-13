@@ -46,9 +46,9 @@ def menuitem_detail(request, id, format=None):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 
-def category(request):
+def category(request, cat):
     if request.method == 'GET':
-        items = Menu.objects.get(name=request.GET.get("cat"))
+        items = Menu.objects.get(pk=cat)
         serializer = MenuSerializer(items)
         return Response(serializer.data)
 
