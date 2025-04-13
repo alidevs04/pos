@@ -4,6 +4,7 @@ from .serializers import MenuSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.exceptions import NotFound
 
 
 @api_view(['GET', 'POST'])
@@ -28,7 +29,7 @@ def menuitem_detail(request, id, format=None):
     try:
         item = Menu.objects.get(pk=id)
     except Menu.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        raise NotFound("Menu with this id is not found")
     
     if request.method == 'GET':
         serializer = MenuSerializer(item)
