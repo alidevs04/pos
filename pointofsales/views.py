@@ -45,7 +45,7 @@ def menuitem_detail(request, id, format=None):
         item.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-
+@api_view(['GET'])
 def category(request, cat):
     if request.method == 'GET':
         items = Menu.objects.filter(category=cat)
