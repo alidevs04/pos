@@ -19,7 +19,7 @@ def menu_list(request, format=None):
         serializer = MenuSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(status=status.HTTP_201_CREATED)
         
 @api_view(['GET', 'PUT', 'DELETE'])
 def menuitem_detail(request, id, format=None):
