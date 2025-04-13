@@ -48,7 +48,7 @@ def menuitem_detail(request, id, format=None):
 
 def category(request, cat):
     if request.method == 'GET':
-        items = Menu.objects.get(pk=cat)
+        items = Menu.objects.filter(category=cat)
         serializer = MenuSerializer(items)
         return Response(serializer.data)
 
