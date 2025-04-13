@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'orderdetails',
     'corsheaders',
     'rest_framework',
     'pointofsales',
@@ -79,14 +82,7 @@ WSGI_APPLICATION = 'pointofsales.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('DB_NAME'),  # The database name
-        'USER': os.getenv('DB_USER'),  # The database username
-        'PASSWORD': os.getenv('DB_PASSWORD'),  # The database password
-        'HOST': os.getenv('DB_HOST'),  # The database host URL
-        'PORT': os.getenv('DB_PORT', '5432'),
-    }
+    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
 }
 
 

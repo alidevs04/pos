@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from pointofsales import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('menuitems/', views.menu_list),
     path('menuitems/<int:id>', views.menuitem_detail),
-    path('menuitems/category/<str:cat>', views.category)
+    path('menuitems/category/<str:cat>', views.category),
+    path('', include('orderdetails.urls'))
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
