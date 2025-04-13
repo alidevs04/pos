@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+from dotenv import load_dotenv
+import environ
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -80,7 +83,9 @@ WSGI_APPLICATION = 'pointofsales.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+load_dotenv()
+env = environ.Env()
+environ.Env.read_env()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -88,7 +93,7 @@ DATABASES = {
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),  # ← this is the problem
+        'PORT': os.getenv('DB_PORT', 5432),
     }
 }
 
