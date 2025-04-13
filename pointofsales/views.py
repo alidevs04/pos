@@ -44,3 +44,11 @@ def menuitem_detail(request, id, format=None):
     else:
         item.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+def category(request):
+    if request.method == 'GET':
+        items = Menu.objects.get(name=request.GET.get("cat"))
+        serializer = MenuSerializer(items)
+        return Response(serializer.data)
+
