@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('menuitems/', views.menu_list),
     path('menuitems/<int:id>', views.menuitem_detail),
-    path('menuitems/<str:cat>', views.category)
+    path('menuitems/category/<str:cat>', views.category)
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

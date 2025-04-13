@@ -48,7 +48,7 @@ def menuitem_detail(request, id, format=None):
 @api_view(['GET'])
 def category(request, cat):
     if request.method == 'GET':
-        items = Menu.objects.filter(category=cat)
+        items = Menu.objects.filter(category__iexact=cat)
         serializer = MenuSerializer(items, many = True)
         return Response(serializer.data)
 
