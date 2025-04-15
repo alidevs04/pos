@@ -27,6 +27,6 @@ def reg_order(request):
 def total_sales_today(request):
     if request.method == 'GET':
         today = now().date()
-        total = Order.objects.filter(order_date=today).aggregate(Sum('amount'))['amount__sum'] or 0
+        total = Order.objects.filter(order_date=today).aggregate(Sum('total_price'))['amount__sum'] or 0
         return JsonResponse({'total_sales': total})
 
