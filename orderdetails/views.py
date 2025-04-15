@@ -23,8 +23,10 @@ def reg_order(request):
         serializer = OrderSerializer(orders, many=True)
         return Response(serializer.data)
 
+@api_view(['GET'])
 def total_sales_today(request):
-    today = now().date()
-    total = Order.objects.filter(order_date__date=today).aggregate(Sum('amount'))['amount__sum'] or 0
-    return JsonResponse({'total_sales': total})
+    if request.method == 'GET':
+        today = now().date()
+        total = Order.objects.filter(order_date=today).aggregate(Sum('amount'))['amount__sum'] or 0
+        return JsonResponse({'total_sales': total})
 
