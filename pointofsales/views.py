@@ -1,4 +1,3 @@
-from django.http import JsonResponse
 from .models import Menu
 from .serializers import MenuSerializer
 from rest_framework.decorators import api_view

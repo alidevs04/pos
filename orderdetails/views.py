@@ -4,6 +4,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import OrderSerializer
 from .models import Order
+from django.http import JsonResponse
+from django.utils.timezone import now
+from django.db.models import Sum
+
 # Create your views here.
 
 @api_view(['POST', 'GET'])
@@ -18,3 +22,9 @@ def reg_order(request):
         orders = Order.objects.all()
         serializer = OrderSerializer(orders, many=True)
         return Response(serializer.data)
+
+def total_sales_today(request):
+    today = now().date()
+    total = Order.objects.filter(order_date__date=today).aggregate(Sum('amount'))['amount__sum'] or 0
+    return JsonResponse({'total_sales': total})
+
